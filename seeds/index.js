@@ -8,7 +8,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/yelpCamp");
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error"));
 db.once("open", () => {
-	console.log("Databse connected");
+	console.log("Databse connected!");
 });
 
 const sample = (array) => array[Math.floor(Math.random() * array.length)];
@@ -18,7 +18,7 @@ const seedDB = async () => {
 	for (let i = 0; i < 50; i++) {
 		const randomCities = Math.floor(Math.random() * cities.length);
 		const camp = new Campground({
-			loacation: `${cities[randomCities].city}, ${cities[randomCities].state}`,
+			location: `${cities[randomCities].city}, ${cities[randomCities].state}`,
 			title: `${sample(descriptors)} ${sample(places)}`,
 		});
 		await camp.save();
@@ -26,5 +26,6 @@ const seedDB = async () => {
 };
 
 seedDB().then(() => {
+	"";
 	mongoose.connection.close();
 });
