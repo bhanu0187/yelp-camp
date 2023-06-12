@@ -5,6 +5,8 @@
 		<form
 			action="/campgrounds/<%= campground._id %>?_method=PUT"
 			method="post"
+			novalidate
+			class="validated-form"
 		>
 			<div class="mb-3">
 				<label
@@ -18,6 +20,7 @@
 					name="campground[title]"
 					class="form-control"
 					value="<%= campground.title %>"
+					required
 				/>
 			</div>
 			<div class="mb-3">
@@ -32,6 +35,7 @@
 					name="campground[location]"
 					class="form-control"
 					value="<%= campground.location %>"
+					required
 				/>
 			</div>
 			<div class="mb-3">
@@ -55,6 +59,7 @@
 						id="price"
 						value="<%= campground.price %>"
 						name="campground[price]"
+						required
 					/>
 				</div>
 			</div>
@@ -65,7 +70,7 @@
 					>Image Url</label
 				>
 				<input type="text" id=imagen" name="campground[image]"
-				class="form-control" value="<%= campground.image %>" />
+				class="form-control" value="<%= campground.image %>" required />
 			</div>
 			<div class="mb-3">
 				<label
@@ -79,15 +84,39 @@
 					cols="30"
 					rows="5"
 					class="form-control"
+					required
 				>
 <%= campground.description %></textarea
 				>
 			</div>
-			<button class="btn btn-success my-3 text-center py-2">
+			<button class="btn btn-info my-3 text-center py-2">
 				Edit Campground
 			</button>
 		</form>
 	</div>
 </div>
 
-<a href="/campgrounds">All Campgrounds</a>
+<script>
+	// Example starter JavaScript for disabling form submissions if there are invalid fields
+	(function () {
+		"use strict";
+
+		// Fetch all the forms we want to apply custom Bootstrap validation styles to
+		const forms = document.querySelectorAll(".validated-form");
+
+		// Loop over them and prevent submission
+		Array.from(forms).forEach(function (form) {
+			form.addEventListener(
+				"submit",
+				function (event) {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add("was-validated");
+				},
+				false
+			);
+		});
+	})();
+</script>
